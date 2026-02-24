@@ -42,7 +42,7 @@ export default function SkillBlock({ group }: SkillBlockProps) {
       />
 
       <p className="font-mono text-[0.65rem] text-[#ff00a0] tracking-[0.3em] uppercase mb-4">
-        // {group.category}
+        {group.category}
       </p>
 
       <div className="flex flex-wrap gap-2">

@@ -46,6 +46,7 @@ export default function ParticleCanvas() {
     }
 
     function resize() {
+      if(!canvas) return;
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       init(canvas.width, canvas.height);
@@ -60,6 +61,7 @@ export default function ParticleCanvas() {
     window.addEventListener("mousemove", handleMouse);
 
     function draw() {
+      if(!canvas || !ctx) return;
       const W = canvas.width;
       const H = canvas.height;
       ctx.clearRect(0, 0, W, H);
