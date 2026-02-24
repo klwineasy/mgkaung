@@ -7,8 +7,8 @@ export const resumeData: ResumeData = {
   summary:
     "Results-driven developer with 6+ years building responsive, high-performance web applications using React, TypeScript, and modern CSS. Bridging design and engineering — from pixel-perfect UIs to cloud integrations.",
   contact: {
-    email: "klwin@email.arizona.edu",
-    phone: "+1 (602) 476-4034",
+    email: "klwin38@gmail.com",
+    // phone: "+1 (602) 476-4034",
     github: "github.com/klwin",
     website: "mgkaung.com",
     location: "Phoenix, AZ",

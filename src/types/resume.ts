@@ -31,7 +31,7 @@ export interface ResumeData {
   summary: string;
   contact: {
     email: string;
-    phone: string;
+    // phone: string;
     github: string;
     website: string;
     location: string;
