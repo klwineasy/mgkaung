@@ -1,10 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  output: 'export',
+  output: "export",
   trailingSlash: true,
-  distDir: 'build',
+  images: { unoptimized: true },
+  experimental: {
+    reactCompiler: false,
+  },
 };
 
 export default nextConfig;

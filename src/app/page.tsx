@@ -1,103 +1,123 @@
-import Image from "next/image";
+import Background from "@/components/Background";
+import Hero from "@/components/Hero";
+import SectionTitle from "@/components/SectionTitle";
+import ExperienceCard from "@/components/ExperienceCard";
+import SkillBlock from "@/components/SkillBlock";
+import CertCard from "@/components/CertCard";
+import Reveal from "@/components/Reveal";
+import ClientShell from "@/components/ClientShell";
+import { resumeData } from "@/data/resume";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const { experience, skillGroups, certifications, education } = resumeData;
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  return (
+    <>
+      <Background />
+      <ClientShell>
+        <div className="relative z-10">
+          {/* HERO */}
+          <Hero data={resumeData} />
+
+          <div className="divider" />
+
+          {/* EXPERIENCE */}
+          <section className="relative z-10 px-[8vw] py-20">
+            <SectionTitle number="01." title="Work Experience" />
+            <div className="grid gap-[3px]">
+              {experience.map((exp, i) => (
+                <Reveal key={exp.company + exp.period} delay={i * 80}>
+                  <ExperienceCard exp={exp} index={i} />
+                </Reveal>
+              ))}
+            </div>
+          </section>
+
+          <div className="divider" />
+
+          {/* SKILLS */}
+          <section className="relative z-10 px-[8vw] py-20">
+            <SectionTitle number="02." title="Technical Skills" />
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+              {skillGroups.map((group, i) => (
+                <Reveal key={group.category} delay={i * 60}>
+                  <SkillBlock group={group} />
+                </Reveal>
+              ))}
+            </div>
+          </section>
+
+          <div className="divider" />
+
+          {/* CERTIFICATIONS */}
+          <section className="relative z-10 px-[8vw] py-20">
+            <SectionTitle number="03." title="Certifications" />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {certifications.map((cert, i) => (
+                <Reveal key={cert.name} delay={i * 100}>
+                  <CertCard cert={cert} />
+                </Reveal>
+              ))}
+            </div>
+          </section>
+
+          <div className="divider" />
+
+          {/* EDUCATION */}
+          <section className="relative z-10 px-[8vw] py-20">
+            <SectionTitle number="04." title="Education" />
+            <Reveal>
+              <div
+                className="relative overflow-hidden max-w-[580px] p-10"
+                style={{
+                  border: "1px solid rgba(0,245,255,0.18)",
+                  background: "rgba(0,245,255,0.04)",
+                  clipPath:
+                    "polygon(0 0, calc(100% - 30px) 0, 100% 30px, 100% 100%, 30px 100%, 0 calc(100% - 30px))",
+                }}
+              >
+                {/* Spinning conic sweep */}
+                <span
+                  className="absolute pointer-events-none animate-edu-spin"
+                  style={{
+                    top: "-50%",
+                    left: "-50%",
+                    width: "200%",
+                    height: "200%",
+                    background:
+                      "conic-gradient(from 180deg, transparent, rgba(0,245,255,0.025), transparent)",
+                  }}
+                />
+                <h3 className="font-orbitron text-[1.05rem] font-bold text-white mb-2 leading-snug relative z-10">
+                  {education.degree}
+                </h3>
+                <p className="font-rajdhani text-[1rem] text-[#00f5ff] tracking-[0.1em] uppercase font-semibold relative z-10">
+                  {education.school}
+                </p>
+                <p className="font-mono text-[0.7rem] text-[#5a7a85] mt-2 tracking-[0.2em] relative z-10">
+                  GRADUATED // {education.graduated}
+                </p>
+              </div>
+            </Reveal>
+          </section>
+
+          <div className="divider" />
+
+          {/* FOOTER */}
+          <footer className="relative z-10 px-[8vw] py-10 flex justify-between items-center flex-wrap gap-4 border-t border-[rgba(0,245,255,0.18)]">
+            <span
+              className="font-orbitron text-[0.75rem] font-bold tracking-[0.2em] text-[#00f5ff]"
+              style={{ textShadow: "0 0 10px rgba(0,245,255,0.5)" }}
+            >
+              KAUNG_LWIN.EXE
+            </span>
+            <span className="font-mono text-[0.65rem] text-[#5a7a85] flex items-center gap-2">
+              <span className="w-[7px] h-[7px] rounded-full bg-[#00ff88] animate-dot-pulse shadow-[0_0_8px_#00ff88]" />
+              AVAILABLE FOR OPPORTUNITIES // PHOENIX, AZ
+            </span>
+          </footer>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </ClientShell>
+    </>
   );
 }
