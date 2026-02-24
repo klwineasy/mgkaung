@@ -101,7 +101,7 @@ export default function Hero({ data }: HeroProps) {
       >
         {[
           { label: contact.email, href: `mailto:${contact.email}` },
-          { label: contact.phone, href: `tel:${contact.phone.replace(/\D/g, "")}` },
+          // { label: contact.phone, href: `tel:${contact.phone.replace(/\D/g, "")}` },
           { label: contact.github, href: `https://${contact.github}` },
           { label: contact.website, href: `https://${contact.website}` },
           { label: contact.location, href: undefined },
